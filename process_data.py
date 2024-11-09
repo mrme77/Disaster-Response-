@@ -81,7 +81,7 @@ def save_data(df, database_filename):
     conn = sqlite3.connect(database_filename)
     df.to_sql('disaster_messages', conn, if_exists='replace', index=False)
     # conn.commit() is unnecessary because to_sql commits changes automatically 
-    # when saving to SQLite.
+    #  when saving to SQLite.
     conn.close()
     return None  
 
