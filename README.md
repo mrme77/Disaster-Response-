@@ -10,12 +10,12 @@ An interactive web application will allow emergency responders to input messages
 - ML Pipeline Preparation.ipynb: Jupyter Notebook contining the steps to prepare the ML pipeline.
 - process_data.py: Python file for running the ETL pipeline.
 - train_classifer.py: Python file for running the ML model.
-- run.py: Python file for running both ETL and ML processes.
+- run.py: Python file for running the interactive web applicaiton piece. 
 - disater_categories.csv: Initial categories dataset.
 - disaster_messages.csv: Initial messages dataset.
 - DisasterResponse.db: Sqlite3 Database created during the ETL process.
 - fire_department.jpg: Readme file intro photo created with AI.
-- 
+
 ### Python Modules
 ```
 import numpy as np
