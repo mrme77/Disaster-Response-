@@ -7,13 +7,17 @@ An interactive web application will allow emergency responders to input messages
 ### Libraries Used
 ```import re
 import numpy as np
+import sqlite3
 import pandas as pd
 import seaborn as nsn
+import re
 from nltk.tokenize import word_tokenize
+from sklearn.multioutput import MultiOutputClassifier
 from nltk.stem import WordNetLemmatizer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+pd.set_option('display.max_colwidth',True)
 ```
