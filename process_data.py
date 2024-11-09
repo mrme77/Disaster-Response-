@@ -8,15 +8,18 @@ def load_data(messages_filepath, categories_filepath):
     Load and merge messages and categories datasets.
 
     Args:
-        messages_filepath (str): Filepath for the CSV file containing messages data.
-        categories_filepath (str): Filepath for the CSV file containing categories data.
+        messages_filepath (str): Filepath for the CSV file containing messages 
+        data.
+        categories_filepath (str): Filepath for the CSV file containing 
+        categories data.
 
     Returns:
-        pd.DataFrame: A DataFrame containing the merged content of messages and categories,
-                      joined on the 'id' column.
+        pd.DataFrame: A DataFrame containing the merged content of messages 
+        and categories,joined on the 'id' column.
                       
-    The resulting DataFrame will contain all columns from both datasets, with any overlapping 
-    entries in the 'id' column serving as the basis for the merge.
+    The resulting DataFrame will contain all columns from both datasets, with 
+    any overlapping entries in the 'id' column serving as the basis for the
+    merge.
     """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -25,29 +28,36 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     """
-    Cleans and preprocesses a DataFrame containing disaster message data by expanding
-    the 'categories' column into individual binary category columns and removing duplicates.
+    Cleans and preprocesses a DataFrame containing disaster message data by 
+    expanding the 'categories' column into individual binary category columns 
+    and removing duplicates.
 
     This function performs the following steps:
-        - Splits the 'categories' column into separate columns, one for each category.
+        - Splits the 'categories' column into separate columns, one for each 
+          category.
         - Sets the column names for each category using the first row of data.
         - Converts category values from strings to integers.
-        - Removes the original 'categories' and 'original' columns from the DataFrame.
+        - Removes the original 'categories' and 'original' columns from the 
+          DataFrame.
         - Removes duplicate entries based on the 'id' column.
         - Resets the DataFrame index.
 
     Args:
         df (pd.DataFrame): The DataFrame containing disaster message data, 
-                           including a 'categories' column with multi-label categorical data.
+                           including a 'categories' column with multi-label 
+                           categorical data.
 
     Returns:
-        pd.DataFrame: A cleaned DataFrame with expanded category columns, deduplicated entries,
-                      and updated index.
+        pd.DataFrame: A cleaned DataFrame with expanded category columns, 
+        deduplicated entries,and updated index.
     """
     categories_split = df['categories'].str.split(';', expand=True)
-    category_colnames = categories_split.iloc[0].apply(lambda x: x.split('-')[0])
+    category_colnames = categories_split.iloc[0].apply(
+        lambda x: x.split('-')[0])
     categories_split.columns = category_colnames
-    categories_split = categories_split.apply(lambda col: col.str.split('-').str[1].astype(int))
+    categories_split = categories_split.apply(
+        lambda col: col.str.split('-').str[1].astype(int)
+    )
     df = df.drop('categories', axis=1)
     df = pd.concat([df, categories_split], axis=1)
     df.drop('original', axis=1, inplace=True)    
@@ -59,21 +69,17 @@ def clean_data(df):
 
 
 
-
-
-
-
-
 def save_data(df, database_filename):
     """
     Saves a DataFrame to a SQLite database file with a specified table name.
 
-    This function connects to a SQLite database, saves the DataFrame as a table named 'disaster_messages',
-    and closes the connection.
+    This function connects to a SQLite database, saves the DataFrame as a 
+    table named 'disaster_messages', and closes the connection.
 
     Args:
         df (pd.DataFrame): The DataFrame to save to the SQLite database.
-        database_filename (str): The path to the SQLite database file where the DataFrame will be stored.
+        database_filename (str): The path to the SQLite database file where 
+        the DataFrame will be stored.
 
     Returns:
         None
