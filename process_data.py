@@ -60,7 +60,7 @@ def clean_data(df):
     )
     df = df.drop('categories', axis=1)
     df = pd.concat([df, categories_split], axis=1)
-    df.drop('original', axis=1, inplace=True)    
+    df.drop(columns=['original','child_alone'], axis=1, inplace=True)   
     df.drop_duplicates(subset='id',inplace=True)
     df.reset_index(drop=True, inplace=True)
     
