@@ -18,6 +18,7 @@ An interactive web application will allow emergency responders to input messages
 
 ### Python Modules
 ```
+# import libraries
 import numpy as np
 import sqlite3
 import pandas as pd
@@ -33,8 +34,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 pd.set_option('display.max_colwidth',True)
+
 
 ```
 ### Acknowledgment
