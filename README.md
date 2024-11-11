@@ -19,10 +19,12 @@ An interactive web application will allow emergency responders to input messages
 ### Python Modules
 ```
 # import libraries
+# import libraries
 import numpy as np
+from tqdm import tqdm
 import sqlite3
 import pandas as pd
-import seaborn as nsn
+import seaborn as sns
 import re
 import pickle
 import warnings
@@ -36,12 +38,12 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
+warnings.filterwarnings('ignore')
 pd.set_option('display.max_colwidth',True)
 
-warnings.filterwarnings("ignore", message=".*The parameter 'token_pattern' will not be used.*")
+
 
 
 
