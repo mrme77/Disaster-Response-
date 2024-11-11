@@ -94,7 +94,7 @@ def index():
                 )
             ],
             'layout': {
-                'title': 'Distribution of Disaster Messages Types in Messages',
+                'title': 'Top 10 Disaster Message Types',
                 'yaxis': {'title': "Count"},
                 'xaxis': {'title': "Disaster Type"}
             }
