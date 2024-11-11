@@ -24,8 +24,10 @@ import sqlite3
 import pandas as pd
 import seaborn as nsn
 import re
+import pickle
 from nltk.tokenize import word_tokenize
 from sklearn.multioutput import MultiOutputClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
 from nltk.stem import WordNetLemmatizer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import confusion_matrix
@@ -35,8 +37,8 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
 pd.set_option('display.max_colwidth',True)
+
 
 
 ```
