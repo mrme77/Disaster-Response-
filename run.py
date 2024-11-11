@@ -90,7 +90,7 @@ def index():
             }
         },
 
-        # Bar chart for disaster types (electricity, earthquake, storm)
+        # Bar chart for some of disaster messages types (electricity, earthquake, storm)
         {
             'data': [
                 Bar(
@@ -99,7 +99,7 @@ def index():
                 )
             ],
             'layout': {
-                'title': 'Distribution of Disaster Types in Messages',
+                'title': 'Distribution of Disaster Messages Types in Messages',
                 'yaxis': {'title': "Count"},
                 'xaxis': {'title': "Disaster Type"}
             }
