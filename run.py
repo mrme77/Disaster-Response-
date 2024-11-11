@@ -62,13 +62,9 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
-    #disaster_columns = ['electricity', 'earthquake', 'storm']  
-    disaster_counts = df.iloc[:, 2:].sum()
-    #disaster_counts = df.loc[:, (df.nunique() <= 2)]
-
-    top_10_disasters = disaster_counts.sort_values(ascending=False).head(10)
-
-    disaster_names = top_10_disasters.index.tolist()  
+    disaster_columns = ['electricity', 'earthquake', 'storm','floods','fire','hospitals']  
+    disaster_counts = df[disaster_columns].sum()  
+    disaster_names = disaster_counts.index.tolist()  
 
     graphs = [
         # Bar chart for genre distribution
@@ -91,8 +87,7 @@ def index():
             'data': [
                 Bar(
                     x=disaster_names,
-                    y=top_10_disasters
-                )
+                    y=disaster_counts                )
             ],
             'layout': {
                 'title': 'Top 10 Disaster Message Types',
