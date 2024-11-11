@@ -46,12 +46,6 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_colwidth',True)
-
-
-
-
-
-
 ```
 ### Acknowledgment
-Special thank you to Stackoverflow, ChatGPT, Google Bard as an instrumental aid in the development of this project.
+Special thanks to Stackoverflow, You.com for its generative AI models, and ChatGPT as an instrumental aid in the development of this project.
