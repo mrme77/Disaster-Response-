@@ -4,6 +4,7 @@ from tqdm import tqdm
 import sqlite3
 import pandas as pd
 import seaborn as sns
+import sys
 import re
 import pickle
 import warnings
@@ -160,12 +161,12 @@ def save_model(model, model_filepath):
 
 
 
-import sys
+
 
 def main():
-    if len(sys.argv) == 4:
+    if len(sys.argv) == 4:  # Expecting 4 arguments (including module)
         database_filepath, model_filepath, module = sys.argv[1:]
-        
+
         try:
             module = int(module)
             if module not in [1, 2, 3]:
@@ -173,37 +174,38 @@ def main():
         except ValueError as e:
             print(f"Invalid module argument: {e}")
             sys.exit(1)
-    # if len(sys.argv) == 3:
-    #     database_filepath, model_filepath = sys.argv[1:]
-        print('Loading data...\n    DATABASE: {}'.format(database_filepath))
-        X, Y = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
-        
-        print('Building model...')
-        model = build_model(database_filepath)          
-        print('Training model...')
-        for _ in tqdm(range(1), desc="Training model"):
-            model.fit(X_train, Y_train)  
-        
-        print('Model training complete!') 
 
-        model.fit(X_train, Y_train)
-        print('Model Training Complete!')
-        print('------------------------')
-        print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test)
-
-        print('Saving model...\n    MODEL: {}'.format(model_filepath))
-        save_model(model, model_filepath)
-
-        print('Trained model saved!')
-
+    elif len(sys.argv) == 3:  # Expecting 3 arguments (without module)
+        database_filepath, model_filepath = sys.argv[1:]
+        module = None  # No module argument
     else:
         print('Please provide the filepath of the disaster messages database '\
               'as the first argument and the filepath of the pickle file to '\
               'save the model to as the second argument. \n\nExample: python '\
               'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
+        sys.exit(1)
 
+    print(f'Loading data...\n    DATABASE: {database_filepath}')
+    X, Y = load_data(database_filepath)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+
+    print('Building model...')
+    model = build_model(database_filepath)
+
+    print('Training model...')
+    for _ in tqdm(range(1), desc="Training model"):
+        model.fit(X_train, Y_train)
+
+    print('Model training complete!')
+
+    print('------------------------')
+    print('Evaluating model...')
+    evaluate_model(model, X_test, Y_test)
+
+    print(f'Saving model...\n    MODEL: {model_filepath}')
+    save_model(model, model_filepath)
+
+    print('Trained model saved!')
 
 if __name__ == '__main__':
     main()
