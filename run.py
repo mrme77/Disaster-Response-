@@ -27,8 +27,6 @@ def tokenize(text):
     """ 
     lemmatizer = WordNetLemmatizer()
     tokens = word_tokenize(text)
-    
-    # initiate lemmatizer
     clean_tokens = [WordNetLemmatizer().lemmatize(token).lower().strip() for token in tokens if token.isalnum()]
     return clean_tokens
 
@@ -44,13 +42,11 @@ def tokenize(text):
 
 #     return clean_tokens
 
-# load data
+# load data from db
 conn = sqlite3.connect('DisasterResponse.db')
 table_name = "disaster_messages"
 df = pd.read_sql(f"SELECT * from {table_name}",conn)
 
-
-# load model
 
 model = joblib.load("/Users/pasqualesalomone/Desktop/UdacityNotes/DataEngineering/de_project/Disaster-Response-/classifier.pkl")
 
@@ -60,22 +56,16 @@ model = joblib.load("/Users/pasqualesalomone/Desktop/UdacityNotes/DataEngineerin
 @app.route('/index')
 def index():
     
+    # data preview and visualizations
     table_html = df.head(3).to_html(classes='table table-striped')
-
-    # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
-    # Example 2: Count of messages for each disaster type (electricity, earthquake, storm, etc.)
     disaster_columns = ['electricity', 'earthquake', 'storm']  # Add other disaster columns as needed
     disaster_counts = df[disaster_columns].sum()  # Count the number of 1s for each disaster column
     disaster_names = disaster_counts.index.tolist()  # Names of the disasters (columns)
 
-    
-    # create visuals
-    # TODO: Below is an example - modify to create your own visuals
-    # Create visuals
     graphs = [
         # Bar chart for genre distribution
         {
