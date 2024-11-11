@@ -35,7 +35,9 @@ def load_data(database_filepath):
     table_name = "disaster_messages"
     df = pd.read_sql(f"SELECT * from {table_name}", conn)
     conn.close()
-    return df
+    X = df['message']  # Features
+    y = df.drop(columns=['id', 'message', 'genre'])  # Targets
+    return X,y
 
 
 
@@ -81,10 +83,10 @@ def build_model(database_filepath, module=1):
                                   - GridSearchCV with RandomForest (module=2)
                                   - Logistic Regression pipeline (module=3)
     """
-    df = load_data(database_filepath)
-    X = df['message']  
-    y = df.drop(columns=['id', 'message', 'genre'])  
-    
+    #df = load_data(database_filepath)
+    #X = df['message']  
+    #y = df.drop(columns=['id', 'message', 'genre'])  
+    X,y = load_data(database_filepath)
     # Standard RandomForest Pipeline
     standard_pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),  
