@@ -1,8 +1,9 @@
 # import libraries
 import numpy as np
+from tqdm import tqdm
 import sqlite3
 import pandas as pd
-import seaborn as nsn
+import seaborn as sns
 import re
 import pickle
 import warnings
@@ -16,10 +17,9 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
-
+warnings.filterwarnings('ignore')
 
 def load_data(database_filepath):
     """
@@ -163,18 +163,33 @@ def save_model(model, model_filepath):
 import sys
 
 def main():
-    if len(sys.argv) == 3:
-        database_filepath, model_filepath = sys.argv[1:]
+    if len(sys.argv) == 4:
+        database_filepath, model_filepath, module = sys.argv[1:]
+        
+        try:
+            module = int(module)
+            if module not in [1, 2, 3]:
+                raise ValueError("Module must be 1, 2, or 3.")
+        except ValueError as e:
+            print(f"Invalid module argument: {e}")
+            sys.exit(1)
+    # if len(sys.argv) == 3:
+    #     database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y = load_data(database_filepath)
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
         
         print('Building model...')
-        model = build_model(database_filepath)  # Modify if additional arguments are needed
-        
+        model = build_model(database_filepath)          
         print('Training model...')
-        model.fit(X_train, Y_train)
+        for _ in tqdm(range(1), desc="Training model"):
+            model.fit(X_train, Y_train)  
         
+        print('Model training complete!') 
+
+        model.fit(X_train, Y_train)
+        print('Model Training Complete!')
+        print('------------------------')
         print('Evaluating model...')
         evaluate_model(model, X_test, Y_test)
 
