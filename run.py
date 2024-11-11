@@ -63,7 +63,8 @@ def index():
     genre_names = list(genre_counts.index)
 
     #disaster_columns = ['electricity', 'earthquake', 'storm']  
-    disaster_counts = df.iloc[:, 1:].sum()
+    disaster_counts = df.iloc[:, 2:].sum()
+    #disaster_counts = df.loc[:, (df.nunique() <= 2)]
 
     top_10_disasters = disaster_counts.sort_values(ascending=False).head(10)
 
