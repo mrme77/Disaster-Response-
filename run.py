@@ -60,6 +60,8 @@ model = joblib.load("/Users/pasqualesalomone/Desktop/UdacityNotes/DataEngineerin
 @app.route('/index')
 def index():
     
+    table_html = df.head().to_html(classes='table table-striped')
+
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
@@ -111,7 +113,7 @@ def index():
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
-    return render_template('master.html', ids=ids, graphJSON=graphJSON)
+    return render_template('master.html',table_html=table_html,ids=ids, graphJSON=graphJSON)
 
 
 # web page that handles user query and displays model results

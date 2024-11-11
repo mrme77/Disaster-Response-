@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <title>Disasters</title>
-
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    "></script>
 </head>
 
 <body>
@@ -30,11 +29,10 @@
     </div>
 </nav>
 
-
 <div class="jumbotron">
     <div class="container">
         <h1 class="text-center">Disaster Response Project</h1>
-        <p class="text-center">Analyzing message data for disaster response</p>
+        <p class="text-center"><i>Analyzing message data for disaster response</i></p>
         <hr />
       
         <div class="row">
@@ -58,6 +56,10 @@
         <div class="page-header">
             <h1 class="text-center">Overview of Training Dataset</h1>
         </div>
+        <!-- Display the HTML table here -->
+        <div class="table-responsive">
+            {{ table_html | safe }}
+        </div>
     {% endblock %}
 
     {% for id in ids %}
@@ -66,9 +68,9 @@
 </div>
 
 <script type="text/javascript">
-    const graphs = {{graphJSON | safe}};
-    const ids = {{ids | safe}};
-    for(let i in graphs) {
+    const graphs = {{ graphJSON | safe }};
+    const ids = {{ ids | safe }};
+    for (let i = 0; i < graphs.length; i++) {
         Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
     }
 </script>
