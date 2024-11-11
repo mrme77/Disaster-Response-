@@ -63,8 +63,11 @@ def index():
     genre_names = list(genre_counts.index)
 
     #disaster_columns = ['electricity', 'earthquake', 'storm']  
-    disaster_counts = df.sum()  
-    disaster_names = disaster_counts.index.tolist()  
+    disaster_counts = df.iloc[:, 1:].sum()
+
+    top_10_disasters = disaster_counts.sort_values(ascending=False).head(10)
+
+    disaster_names = top_10_disasters.index.tolist()  
 
     graphs = [
         # Bar chart for genre distribution
