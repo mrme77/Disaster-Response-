@@ -12,6 +12,8 @@ import sqlite3
 
 
 app = Flask(__name__)
+
+
 def tokenize(text):
     """
     Tokenizes and cleans text by splitting into words, lemmatizing, normalizing case, 
@@ -23,8 +25,9 @@ def tokenize(text):
     Returns:
         list of str: A list of processed, lowercase, lemmatized tokens with punctuation removed.
     """ 
-    tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
+    tokens = word_tokenize(text)
+    
     # initiate lemmatizer
     clean_tokens = [WordNetLemmatizer().lemmatize(token).lower().strip() for token in tokens if token.isalnum()]
     return clean_tokens
