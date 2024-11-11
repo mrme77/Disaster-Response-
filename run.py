@@ -12,17 +12,34 @@ import sqlite3
 
 
 app = Flask(__name__)
-
 def tokenize(text):
+    """
+    Tokenizes and cleans text by splitting into words, lemmatizing, normalizing case, 
+    and removing non-alphanumeric tokens.
+
+    Args:
+        text (str): The text string to tokenize and clean.
+
+    Returns:
+        list of str: A list of processed, lowercase, lemmatized tokens with punctuation removed.
+    """ 
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
-
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
-
+    # initiate lemmatizer
+    clean_tokens = [WordNetLemmatizer().lemmatize(token).lower().strip() for token in tokens if token.isalnum()]
     return clean_tokens
+
+
+# def tokenize(text):
+#     tokens = word_tokenize(text)
+#     lemmatizer = WordNetLemmatizer()
+
+#     clean_tokens = []
+#     for tok in tokens:
+#         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+#         clean_tokens.append(clean_tok)
+
+#     return clean_tokens
 
 # load data
 conn = sqlite3.connect('DisasterResponse.db')
