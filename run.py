@@ -62,9 +62,9 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
-    disaster_columns = ['electricity', 'earthquake', 'storm']  # Add other disaster columns as needed
-    disaster_counts = df[disaster_columns].sum()  # Count the number of 1s for each disaster column
-    disaster_names = disaster_counts.index.tolist()  # Names of the disasters (columns)
+    #disaster_columns = ['electricity', 'earthquake', 'storm']  
+    disaster_counts = df.sum()  
+    disaster_names = disaster_counts.index.tolist()  
 
     graphs = [
         # Bar chart for genre distribution
