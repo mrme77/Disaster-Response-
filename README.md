@@ -13,6 +13,8 @@ An interactive web application will allow emergency responders to input messages
 - run.py: Python file for running the interactive web applicaiton piece. 
 - disater_categories.csv: Initial categories dataset.
 - disaster_messages.csv: Initial messages dataset.
+- template.html: provides the common layout for the website.
+- go.html: it is specific to the page and uses the template for structure while injecting unique content.
 - DisasterResponse.db: Sqlite3 Database created during the ETL process.
 - fire_department.jpg: Readme file intro photo created with AI.
 
@@ -25,6 +27,7 @@ from tqdm import tqdm
 import sqlite3
 import pandas as pd
 import seaborn as sns
+import joblib
 import re
 import sys
 import pickle
