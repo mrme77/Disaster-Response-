@@ -64,10 +64,18 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    # Example 2: Count of messages for each disaster type (electricity, earthquake, storm, etc.)
+    disaster_columns = ['electricity', 'earthquake', 'storm']  # Add other disaster columns as needed
+    disaster_counts = df[disaster_columns].sum()  # Count the number of 1s for each disaster column
+    disaster_names = disaster_counts.index.tolist()  # Names of the disasters (columns)
+
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
+    # Create visuals
     graphs = [
+        # Bar chart for genre distribution
         {
             'data': [
                 Bar(
@@ -75,19 +83,29 @@ def index():
                     y=genre_counts
                 )
             ],
-
             'layout': {
                 'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
+                'yaxis': {'title': "Count"},
+                'xaxis': {'title': "Genre"}
+            }
+        },
+
+        # Bar chart for disaster types (electricity, earthquake, storm)
+        {
+            'data': [
+                Bar(
+                    x=disaster_names,
+                    y=disaster_counts
+                )
+            ],
+            'layout': {
+                'title': 'Distribution of Disaster Types in Messages',
+                'yaxis': {'title': "Count"},
+                'xaxis': {'title': "Disaster Type"}
             }
         }
     ]
-    
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
