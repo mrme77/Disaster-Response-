@@ -51,6 +51,8 @@ pd.set_option('display.max_colwidth',True)
 - go.html: it is specific to the page and uses the template for structure while injecting unique content.
 - DisasterResponse.db: Sqlite3 Database created during the ETL process.
 - fire_department.jpg: Readme file intro photo created with AI.
+- AppViz1.jpg: Readme file supporting picture.
+- AppViz2.jpg: Readme file supporting picture
 
 The model is turned into a pickle file and used in the web application. However, since the file exceeds GitHub's file size limit, it will not be shared to avoid commit issues.
 ### Resources
@@ -58,7 +60,10 @@ The model is turned into a pickle file and used in the web application. However,
 - [NLTK](https://www.nltk.org/)
 - [Flask](https://flask.palletsprojects.com/en/stable/)
 - Html/Css notes
-
+### Outputs
+Below are 2 screenshots displaying the web application.
+![Image](AppViz1.png)
+![Image](AppViz2.png)
 
 ### Acknowledgment
 I would like to acknowledge to Stackoverflow, You.com for its generative AI models, and ChatGPT as an instrumental aid in the development of this project.
