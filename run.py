@@ -60,7 +60,7 @@ model = joblib.load("/Users/pasqualesalomone/Desktop/UdacityNotes/DataEngineerin
 @app.route('/index')
 def index():
     
-    table_html = df.head().to_html(classes='table table-striped')
+    table_html = df.head(3).to_html(classes='table table-striped')
 
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
