@@ -90,7 +90,7 @@ def index():
             'data': [
                 Bar(
                     x=disaster_names,
-                    y=disaster_counts
+                    y=top_10_disasters
                 )
             ],
             'layout': {
