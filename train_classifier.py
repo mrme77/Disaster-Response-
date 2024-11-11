@@ -1,12 +1,36 @@
 import sys
-
+import pandas as pd
+import sqlite3
 
 def load_data(database_filepath):
-    pass
+    # load data from database
+    conn = sqlite3.connect('DisasterResponse.db')
+    table_name = "disaster_messages"
+    df = pd.read_sql(f"SELECT * from {table_name}",conn)
+    conn.close()
+    return df
 
 
 def tokenize(text):
-    pass
+    """
+    Tokenizes and cleans text by splitting into words, lemmatizing, normalizing case, 
+    and removing non-alphanumeric tokens.
+
+    Args:
+        text (str): The text string to tokenize and clean.
+
+    Returns:
+        list of str: A list of processed, lowercase, lemmatized tokens with punctuation removed.
+    """ 
+    tokens = word_tokenize(text)
+    lemmatizer = WordNetLemmatizer()
+    # initiate lemmatizer
+    clean_tokens = [WordNetLemmatizer().lemmatize(token).lower().strip() for token in tokens if token.isalnum()]
+    return clean_tokens
+
+
+
+
 
 
 def build_model():
