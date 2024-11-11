@@ -25,7 +25,9 @@ import pandas as pd
 import seaborn as nsn
 import re
 import pickle
+import warnings
 from nltk.tokenize import word_tokenize
+from sklearn.model_selection import cross_val_score
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
 from nltk.stem import WordNetLemmatizer
@@ -38,6 +40,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 pd.set_option('display.max_colwidth',True)
+
+warnings.filterwarnings("ignore", message=".*The parameter 'token_pattern' will not be used.*")
+
 
 
 
