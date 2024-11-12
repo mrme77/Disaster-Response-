@@ -44,10 +44,16 @@ pd.set_option('display.max_colwidth',True)
 <ul> - The `message` attribute has high percentage of missing values and since it provides a translation of the `original` and it is consistently populated in English,it would be best to drop this column.</ul>
 <ul> - Both datasets present duplicated records which can be removed.</ul>
 <ul> - the categories dataset has multi-lable econding in single column meaning that the entire set of categories is stored in the column `categories` with each category-label separated by a semicolon. Transformations are required to restructure the dataset into a more analyzable format, where each category is represented as an individual column with binary values indicating presence or absence.</ul>
-<ul> - The attribute `child_alone` has only one label (0) which suggests that it does not provide any variability or useful information for analysis. It is advisable to remove this category from the dataset for the following reasons:
-<ul> - The attribute `related` has three distinct levels (0, 1, and 2), it’s considered a categorical variable with three levels rather than a binary variable.
+<ul> - The attribute `child_alone` has only one label (0) which suggests that it does not provide any variability or useful information for analysis. It is advisable to remove this category from the dataset.</ul>
+<ul> - The attribute `related` has three distinct levels (0, 1, and 2), it’s considered a categorical variable with three levels rather than a binary variable.</ul>
 
-ML Pipeline Preparation.ipynb: Jupyter Notebook contining the steps to prepare the ML pipeline.
+ML Pipeline Preparation.ipynb: Jupyter Notebook contining the steps to prepare the ML pipeline. After loading the data and applying a tokenize function, we build an ML pipeline.Once trainined/tested models can be saved as pickle file.
+<ul> - The initial pipeline has 3 steps: 
+TextVectorization, Term Frequency-Inverse Document Frequency (TF-IDF) Transformation, and  MultiOutputClassifier- RandomForestClassifier.</ul>
+<ul> - The second pipeline leverages GridSearch which is a technique used in machine learning for tuning the hyperparameters of a model.</ul>
+<ul> - The tird pipeline uses the same steps as the initial pipeline with the exception of the last one where it leverages a MultiOutputClassifier-LogisticRegression.</ul>
+
+Other files:
 - process_data.py: Python file for running the ETL pipeline.
 - train_classifer.py: Python file for running the ML model.
 - run.py: Python file for running the interactive web applicaiton piece. 
