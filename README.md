@@ -40,8 +40,14 @@ warnings.filterwarnings('ignore')
 pd.set_option('display.max_colwidth',True)
 ```
 ### Deployment
-- ETL Pipeline Preparation.ipynb: Jupyter Notebook containing the ETL code as well as some EDA info.
-- ML Pipeline Preparation.ipynb: Jupyter Notebook contining the steps to prepare the ML pipeline.
+<ul> ETL Pipeline Preparation.ipynb: Jupyter Notebook containing the ETL code as well as some EDA info. After loading the messages and categories datasets into pandas dataframe, we observe some issues. 
+<ul> - The `message` attribute has high percentage of missing values and since it provides a translation of the `original` and it is consistently populated in English,it would be best to drop this column.</ul>
+<ul> - Both datasets present duplicated records which can be removed.</ul>
+<ul> - the categories dataset has multi-lable econding in single column meaning that the entire set of categories is stored in the column `categories` with each category-label separated by a semicolon. Transformations are required to restructure the dataset into a more analyzable format, where each category is represented as an individual column with binary values indicating presence or absence.</ul>
+<ul> - The attribute `child_alone` has only one label (0) which suggests that it does not provide any variability or useful information for analysis. It is advisable to remove this category from the dataset for the following reasons:
+<ul> - The attribute `related` has three distinct levels (0, 1, and 2), it’s considered a categorical variable with three levels rather than a binary variable.
+
+ML Pipeline Preparation.ipynb: Jupyter Notebook contining the steps to prepare the ML pipeline.
 - process_data.py: Python file for running the ETL pipeline.
 - train_classifer.py: Python file for running the ML model.
 - run.py: Python file for running the interactive web applicaiton piece. 
